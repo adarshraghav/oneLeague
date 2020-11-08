@@ -6,14 +6,16 @@ import 'package:sqflite/sqlite_api.dart';
 
 class DatabaseHelper {
   //name of database:
-  static final _dbName = 'yada.db';
+  static final _dbName = 'contact.db';
   static final _dbVersion = 1;
-  static final _tableName = 'mytable';
-
+  static final _tableName = 'cinfo';
   static final columnId = '_id';
-  static final columnFName = '_firstname';
-  static final columnLName = '_lastname';
-
+  static final columnNum = '_number';
+  static final columnLine1 = '_line1';
+  static final columnLine2 = '_line2';
+  static final columnCity = '_city';
+  static final columnState = '_state';
+  static final columnZip = '_zip';
   //here we are making this class a singleton class
   DatabaseHelper._privateConstruction();
   static final DatabaseHelper instance = DatabaseHelper._privateConstruction();
@@ -45,8 +47,12 @@ class DatabaseHelper {
     db.execute('''
       CREATE TABLE $_tableName(
         $columnId INTEGER PRIMARY KEY,
-        $columnFName TEXT NOT NULL,
-        $columnLName TEXT NOT NULL
+        $columnNum TEXT NOT NULL,
+        $columnLine1 TEXT NOT NULL,
+        $columnLine2 TEXT NOT NULL,
+        $columnCity TEXT NOT NULL,
+        $columnState TEXT NOT NULL,
+        $columnZip TEXT NOT NULL
       )
       ''');
   }
@@ -70,7 +76,7 @@ class DatabaseHelper {
     Database db = await instance.database;
     int id = row[columnId];
     return await db.update(_tableName, row,
-        where: '$columnId = ? $columnFName = ?', whereArgs: [id]);
+        where: '$columnId = ? $columnNum = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {

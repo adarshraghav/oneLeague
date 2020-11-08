@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sqlite/pages/Dashboard/top.dart';
-import 'nhelper.dart';
+import 'shelper.dart';
 import 'package:validators/validators.dart' as validator;
 import 'pmodel.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -59,6 +59,16 @@ class _TestFormState extends State<TestForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 18,
+          ),
+          Text(
+            "Personal Information",
+            style: TextStyle(fontSize: 22),
+          ),
+          SizedBox(
+            height: 18,
+          ),
           Container(
             alignment: Alignment.topCenter,
             child: Row(
@@ -156,7 +166,7 @@ class _TestFormState extends State<TestForm> {
                 groupValue: selectedRadio,
                 activeColor: Colors.green,
                 onChanged: (val) {
-                  print("Radio $val");
+                  model.gender = "Male";
                   setSelectedRadio(val);
                 },
               ),
@@ -166,7 +176,7 @@ class _TestFormState extends State<TestForm> {
                 groupValue: selectedRadio,
                 activeColor: Colors.blue,
                 onChanged: (val) {
-                  print("Radio $val");
+                  model.gender = "Female";
                   setSelectedRadio(val);
                 },
               ),
@@ -204,7 +214,10 @@ class _TestFormState extends State<TestForm> {
                       context: context,
                       firstDate: DateTime(1900),
                       initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime(2100));
+                      lastDate: DateTime(2021));
+                },
+                onSaved: (value) {
+                  model.bod = value.toString();
                 },
               )),
           RaisedButton(
@@ -284,17 +297,17 @@ class Result extends StatelessWidget {
             Text(model.firstName, style: TextStyle(fontSize: 22)),
             Text(model.lastName, style: TextStyle(fontSize: 22)),
             Text(model.email, style: TextStyle(fontSize: 22)),
+            Text(model.gender, style: TextStyle(fontSize: 22)),
+            Text(model.bod, style: TextStyle(fontSize: 22)),
             RaisedButton(
               color: Colors.blueAccent,
               onPressed: () async {
                 int i = await DatabaseHelper.instance.insert({
                   DatabaseHelper.columnFName: model.firstName,
                   DatabaseHelper.columnLName: model.lastName,
+                  DatabaseHelper.columnemail: model.email,
+                  DatabaseHelper.columndob: model.bod,
                 });
-
-                print(i);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
               },
               child: Text(
                 'Save',

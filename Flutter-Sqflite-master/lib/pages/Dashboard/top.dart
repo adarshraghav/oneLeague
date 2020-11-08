@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sqlite/pages/Dashboard/contactinfo/contactinfo.dart';
 import 'package:flutter_sqlite/pages/Dashboard/personalinfo/personalinfo.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'contactinfo/contactinfo.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -151,8 +153,8 @@ class _MyAppState extends State<MyApp> {
             ),
             child: FlatButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyApp10()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cinfo()));
               },
               child: Row(
                 children: [
@@ -172,7 +174,50 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
             ),
-          )
+          ),
+
+          Container(
+            width: 350,
+            height: 75,
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0.0, 5.0), //(x,y)
+                  blurRadius: 6.0,
+                ),
+              ],
+              gradient: new LinearGradient(
+                colors: [Colors.blue, Colors.green],
+                begin: FractionalOffset.centerLeft,
+                end: FractionalOffset.centerRight,
+              ),
+            ),
+            child: FlatButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cinfo()));
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.phone,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Text(" "),
+                  Text(
+                    "Family Information",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  Text("              "),
+                  Text("0%",
+                      style: TextStyle(color: Colors.white, fontSize: 18))
+                ],
+              ),
+            ),
+          ),
         ],
       )),
     );
