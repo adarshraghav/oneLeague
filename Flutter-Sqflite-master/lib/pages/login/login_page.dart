@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
     var loginBtn = new RaisedButton(
       onPressed: _submit,
       child: new Text("Login"),
-      color: Colors.green,
+      color: Colors.blue,
     );
     var registerBtn = new RaisedButton(
       padding: const EdgeInsets.all(10.0),
@@ -86,7 +86,13 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
             ],
           ),
         ),
-        new Padding(padding: const EdgeInsets.all(10.0), child: loginBtn),
+        new Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              child: loginBtn,
+              height: 50,
+              width: 150,
+            )),
         registerBtn
       ],
     );

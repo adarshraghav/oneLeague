@@ -42,183 +42,284 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          body: Column(
-        children: <Widget>[
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 200.0,
-              autoPlay: false,
-              autoPlayInterval: Duration(seconds: 5),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: true,
-              aspectRatio: 2.0,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
+          body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200.0,
+                autoPlay: false,
+                autoPlayInterval: Duration(seconds: 5),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                pauseAutoPlayOnTouch: true,
+                aspectRatio: 2.0,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              items: cardList.map((card) {
+                return Builder(builder: (BuildContext context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      color: Colors.blueAccent,
+                      child: card,
+                    ),
+                  );
                 });
-              },
+              }).toList(),
             ),
-            items: cardList.map((card) {
-              return Builder(builder: (BuildContext context) {
+            //this row below is for the progress dots below the slider:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: map<Widget>(cardList, (index, url) {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.30,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    color: Colors.blueAccent,
-                    child: card,
+                  width: 20.0,
+                  height: 2.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: _currentIndex == index
+                        ? Colors.blueAccent
+                        : Colors.grey,
                   ),
                 );
-              });
-            }).toList(),
-          ),
-          //this row below is for the progress dots below the slider:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: map<Widget>(cardList, (index, url) {
-              return Container(
-                width: 20.0,
-                height: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color:
-                      _currentIndex == index ? Colors.blueAccent : Colors.grey,
-                ),
-              );
-            }),
-          ),
-          Container(
-            width: 350,
-            height: 75,
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0.0, 5.0), //(x,y)
-                  blurRadius: 6.0,
-                ),
-              ],
-              gradient: new LinearGradient(
-                colors: [Colors.red, Colors.blue],
-                begin: FractionalOffset.centerLeft,
-                end: FractionalOffset.centerRight,
-              ),
+              }),
             ),
-            child: FlatButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyApp10()));
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.account_circle,
-                    color: Colors.white,
-                    size: 30,
+            Container(
+              width: 350,
+              height: 75,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 5.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
-                  Text(" "),
-                  Text(
-                    "Personal Information",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  Text("            "),
-                  Text("0%",
-                      style: TextStyle(color: Colors.white, fontSize: 18))
                 ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: 350,
-            height: 75,
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0.0, 5.0), //(x,y)
-                  blurRadius: 6.0,
+                gradient: new LinearGradient(
+                  colors: [Colors.red, Colors.blue],
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
                 ),
-              ],
-              gradient: new LinearGradient(
-                colors: [Colors.red, Colors.green],
-                begin: FractionalOffset.centerLeft,
-                end: FractionalOffset.centerRight,
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyApp10()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.account_circle,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(" "),
+                    Text(
+                      "Personal Information",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Text("            "),
+                    Text("0%",
+                        style: TextStyle(color: Colors.white, fontSize: 18))
+                  ],
+                ),
               ),
             ),
-            child: FlatButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Cinfo()));
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.phone,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  Text(" "),
-                  Text(
-                    "Contact Information",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  Text("              "),
-                  Text("0%",
-                      style: TextStyle(color: Colors.white, fontSize: 18))
-                ],
-              ),
-            ),
-          ),
 
-          Container(
-            width: 350,
-            height: 75,
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0.0, 5.0), //(x,y)
-                  blurRadius: 6.0,
-                ),
-              ],
-              gradient: new LinearGradient(
-                colors: [Colors.blue, Colors.green],
-                begin: FractionalOffset.centerLeft,
-                end: FractionalOffset.centerRight,
-              ),
+            SizedBox(
+              height: 20,
             ),
-            child: FlatButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Cinfo()));
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.phone,
-                    color: Colors.white,
-                    size: 30,
+
+            Container(
+              width: 350,
+              height: 75,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 5.0), //(x,y)
+                    blurRadius: 6.0,
                   ),
-                  Text(" "),
-                  Text(
-                    "Family Information",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  Text("              "),
-                  Text("0%",
-                      style: TextStyle(color: Colors.white, fontSize: 18))
                 ],
+                gradient: new LinearGradient(
+                  colors: [Colors.red, Colors.green],
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
+                ),
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Cinfo()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.phone,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(" "),
+                    Text(
+                      "Contact Information",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Text("              "),
+                    Text("0%",
+                        style: TextStyle(color: Colors.white, fontSize: 18))
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+
+            SizedBox(
+              height: 20,
+            ),
+
+            Container(
+              width: 350,
+              height: 75,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 5.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+                gradient: new LinearGradient(
+                  colors: [Colors.blue, Colors.purple],
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
+                ),
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Cinfo()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.face,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(" "),
+                    Text(
+                      " Family Information",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Text("                "),
+                    Text("0%",
+                        style: TextStyle(color: Colors.white, fontSize: 18))
+                  ],
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+
+            Container(
+              width: 350,
+              height: 75,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 5.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+                gradient: new LinearGradient(
+                  colors: [Colors.orange, Colors.cyan],
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
+                ),
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Cinfo()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.history_edu,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(" "),
+                    Text(
+                      " Citizenship Information",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Text("    "),
+                    Text("0%",
+                        style: TextStyle(color: Colors.white, fontSize: 18))
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 350,
+              height: 75,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 5.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+                gradient: new LinearGradient(
+                  colors: [Colors.pink, Colors.red],
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
+                ),
+              ),
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Cinfo()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.history_edu,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(" "),
+                    Text(
+                      " High School Information",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Text("    "),
+                    Text("0%",
+                        style: TextStyle(color: Colors.white, fontSize: 18))
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       )),
     );
   }
