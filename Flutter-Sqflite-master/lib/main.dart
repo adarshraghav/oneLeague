@@ -30,7 +30,7 @@ class _OnboardingState extends State<Onboarding> {
     return [
       PageViewModel(
         image: Image.asset(
-          "Flutter-Sqflite-master/assets/1.png",
+          "assets/1.png",
           alignment: Alignment.bottomCenter,
         ),
         title: "Search & Seek",
@@ -40,7 +40,7 @@ class _OnboardingState extends State<Onboarding> {
       ),
       PageViewModel(
           image: Image.asset(
-            "Flutter-Sqflite-master/assets/1.png",
+            "assets/2.png",
             height: 175,
             alignment: Alignment.bottomCenter,
           ),
@@ -50,7 +50,7 @@ class _OnboardingState extends State<Onboarding> {
           decoration: pageDecoration),
       PageViewModel(
           image: Image.asset(
-            "Flutter-Sqflite-master/assets/1.png",
+            "assets/3.png",
             alignment: Alignment.bottomCenter,
             height: 100,
           ),
