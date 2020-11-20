@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sqlite/pages/Dashboard/top.dart';
+import 'package:flutter_sqlite/pages/explore/explore.dart';
 
 void main() => runApp(Dash());
 
@@ -18,7 +19,10 @@ class Dash extends StatelessWidget {
                   Icons.search,
                   color: Colors.white,
                 ),
-                onPressed: null)
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => explore()));
+                })
           ],
         ),
         body: HomePage(),
