@@ -12,7 +12,6 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
   BuildContext _ctx;
   bool _isLoading = false;
   final formKey = new GlobalKey<FormState>();
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   String _email, _password;
 
@@ -38,32 +37,35 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
     }
   }
 
-  void _showSnackBar(String text) {
-    scaffoldKey.currentState.showSnackBar(new SnackBar(
-      content: new Text(text),
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
     _ctx = context;
     var loginBtn = new RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       onPressed: _submit,
-      child: new Text("Login"),
-      color: Colors.blue,
+      child: new Text(
+        "Login",
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      ),
+      color: Color.fromRGBO(17, 34, 63, 1),
     );
     var registerBtn = new RaisedButton(
-      padding: const EdgeInsets.all(10.0),
+      elevation: 0,
+      hoverColor: Colors.blue,
+      padding: const EdgeInsets.all(0.0),
       onPressed: _register,
-      child: new Text("Register"),
-      color: Colors.green,
+      child: new Text(
+        "Sign Up",
+        style: TextStyle(decoration: TextDecoration.underline),
+      ),
+      color: Colors.white,
     );
     var loginForm = new Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        new Text(
-          "Login",
-          textScaleFactor: 2.0,
+        SizedBox(
+          height: 330,
         ),
         new Form(
           key: formKey,
@@ -73,44 +75,76 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
                 padding: const EdgeInsets.all(20.0),
                 child: new TextFormField(
                   onSaved: (val) => _email = val,
-                  decoration: new InputDecoration(labelText: "Email"),
+                  decoration: new InputDecoration(
+                    labelText: "Enter your email",
+                  ),
                 ),
               ),
               new Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
-                  decoration: new InputDecoration(labelText: "Password"),
+                  decoration:
+                      new InputDecoration(labelText: "Enter your password"),
                 ),
               )
             ],
           ),
         ),
-        new Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              child: loginBtn,
-              height: 50,
-              width: 150,
-            )),
-        registerBtn
       ],
     );
 
-    return new Scaffold(
-      appBar: new AppBar(
-        elevation: 0.0,
-        title: new Text(
-          "Login Page",
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-      ),
-      key: scaffoldKey,
-      body: new Container(
+    return Scaffold(
+      body: Container(
         color: Colors.white,
-        child: new Center(
-          child: loginForm,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -50,
+              left: 0,
+              child: Container(
+                height: 400,
+                width: 400,
+                child: Image.asset(
+                  "assets/background.jpg",
+                  height: 500,
+                  width: 500,
+                ),
+              ),
+            ),
+            Positioned(
+                left: 10,
+                top: 220,
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 60,
+                      color: Colors.white,
+                      debugLabel: 'whiteCupertino title',
+                      fontFamily: '.SF UI Display'),
+                )),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: loginForm,
+            ),
+            Positioned(
+              top: 520,
+              left: 15,
+              child: new Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: loginBtn,
+                    height: 50,
+                    width: 100,
+                  )),
+            ),
+            Positioned(
+                top: 726, left: 106, child: Text("Dont have an account ?")),
+            Positioned(top: 710, left: 260, child: registerBtn)
+          ],
         ),
       ),
     );
@@ -118,8 +152,6 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
 
   @override
   void onLoginError(String error) {
-    // TODO: implement onLoginError
-    _showSnackBar("Login not successful");
     setState(() {
       _isLoading = false;
     });
@@ -127,12 +159,6 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
 
   @override
   void onLoginSuccess(User user) async {
-    // TODO: implement onLoginSuccess
-    if (user.username == "") {
-      _showSnackBar("Login not successful");
-    } else {
-      _showSnackBar(user.toString());
-    }
     setState(() {
       _isLoading = false;
     });

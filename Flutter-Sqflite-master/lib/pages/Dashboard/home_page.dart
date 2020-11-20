@@ -10,7 +10,7 @@ class Dash extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(17, 34, 63, 1),
           title: Text("Dashboard"),
           actions: [
             IconButton(
