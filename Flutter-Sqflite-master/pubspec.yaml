@@ -54,6 +54,12 @@ flutter:
     - assets/3.png
     - assets/login.jpg
     - assets/background.jpg
+    - assets/bennett.png
+    - assets/Manipal.png
+    - assets/vit.png
+    - assets/IITM.png
+    - assets/mu.jpg
+    - assets/up.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

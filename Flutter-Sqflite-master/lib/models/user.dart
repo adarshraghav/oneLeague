@@ -4,8 +4,6 @@ class User {
   String _password;
   String _flaglogged;
 
-
-
   User(this._name, this._username, this._password, this._flaglogged);
 
   User.map(dynamic obj) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sqlite/pages/Dashboard/home_page.dart';
+import 'package:flutter_sqlite/pages/explore/explore.dart';
 import 'package:flutter_sqlite/pages/login/login_page.dart';
 import 'package:flutter_sqlite/pages/login/register.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -9,7 +10,7 @@ void main() => runApp(MyApp());
 final routes = {
   '/onboarding': (BuildContext context) => new Onboarding(),
   '/login': (BuildContext context) => new LoginPage(),
-  '/home': (BuildContext context) => new Dash(),
+  '/home': (BuildContext context) => new explore(),
   '/register': (BuildContext context) => new RegisterPage(),
   '/': (BuildContext context) => new Onboarding(),
 };
