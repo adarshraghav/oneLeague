@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_sqlite/pages/Dashboard/home_page.dart';
 
+import 'bennett.dart';
+
 class explore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class explore extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Dash()));
+                    context, MaterialPageRoute(builder: (context) => Bu()));
               },
               child: Container(
                 width: 160.0,

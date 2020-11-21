@@ -18,56 +18,110 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     _ctx = context;
     var loginBtn = new RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       onPressed: _submit,
-      child: new Text("Register"),
-      color: Colors.green,
+      child: new Text("Submit",
+          style: TextStyle(color: Colors.white, fontSize: 18)),
+      color: Color.fromRGBO(17, 34, 63, 1),
     );
 
     var loginForm = new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        new Text(
-          "Sign Up",
-          textScaleFactor: 2.0,
-        ),
         new Form(
           key: formKey,
           child: new Column(
             children: <Widget>[
+              SizedBox(
+                height: 315,
+              ),
               new Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
                   onSaved: (val) => _name = val,
-                  decoration: new InputDecoration(labelText: "Name"),
+                  decoration: new InputDecoration(labelText: "Enter your name"),
                 ),
               ),
               new Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
                   onSaved: (val) => _username = val,
-                  decoration: new InputDecoration(labelText: "Email"),
+                  decoration:
+                      new InputDecoration(labelText: "Enter your email"),
                 ),
               ),
               new Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
-                  decoration: new InputDecoration(labelText: "Password"),
+                  decoration:
+                      new InputDecoration(labelText: "Create a password"),
                 ),
               )
             ],
           ),
         ),
-        loginBtn
       ],
     );
 
     return new Scaffold(
       key: scaffoldKey,
-      body: new Container(
-        child: new Center(
-          child: loginForm,
-        ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: -50,
+            left: 0,
+            child: Container(
+              height: 400,
+              width: 400,
+              child: Image.asset(
+                "assets/background.jpg",
+                height: 500,
+                width: 500,
+              ),
+            ),
+          ),
+          Positioned(
+              left: 10,
+              top: 205,
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 60,
+                    color: Colors.white,
+                    debugLabel: 'whiteCupertino title',
+                    fontFamily: '.SF UI Display'),
+              )),
+          Positioned(
+              left: 22,
+              top: 276,
+              child: Text(
+                "Its quick and easy",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              )),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: loginForm,
+          ),
+          Positioned(
+            top: 565,
+            left: 4,
+            child: new Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: loginBtn,
+                  height: 50,
+                  width: 100,
+                )),
+          ),
+        ],
       ),
     );
   }
