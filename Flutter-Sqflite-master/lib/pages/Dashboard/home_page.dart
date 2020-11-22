@@ -12,18 +12,7 @@ class Dash extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(17, 34, 63, 1),
-          title: Text("Dashboard"),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => explore()));
-                })
-          ],
+          title: Text("Profile"),
         ),
         body: HomePage(),
       ),

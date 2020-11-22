@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
             CarouselSlider(
               options: CarouselOptions(
                 height: 200.0,
-                autoPlay: false,
+                autoPlay: true,
                 autoPlayInterval: Duration(seconds: 5),
                 autoPlayAnimationDuration: Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
@@ -444,22 +444,33 @@ class Item4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold)),
-          Text("Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
+    return InkWell(
+        onTap: () => launch(
+            "https://indianexpress.com/article/education/du-to-have-two-more-cut-off-lists-heres-how-you-can-apply-for-admission-du-ac-in-7060243/"),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: [0.3, 1],
+                colors: [Color(0xff5f2c82), Color(0xff49a09d)]),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("DU to have more cut-off lists",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold)),
+              Text("Indian Express",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.w600)),
+            ],
+          ),
+        ));
   }
 }

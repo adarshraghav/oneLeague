@@ -22,7 +22,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TestForm(),
+      body: Stack(children: [
+        Positioned(
+          bottom: 10,
+          height: 255,
+          child: Image.asset('assets/waves.png'),
+        ),
+        TestForm()
+      ]),
     );
   }
 }
@@ -60,14 +67,14 @@ class _TestFormState extends State<TestForm> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 18,
+            height: 10,
           ),
           Text(
             "Personal Information",
-            style: TextStyle(fontSize: 22),
+            style: TextStyle(color: Colors.black, fontSize: 28),
           ),
           SizedBox(
-            height: 18,
+            height: 15,
           ),
           Container(
             alignment: Alignment.topCenter,
@@ -288,18 +295,148 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
-      appBar: AppBar(title: Text('Successful')),
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(model.firstName, style: TextStyle(fontSize: 22)),
-            Text(model.lastName, style: TextStyle(fontSize: 22)),
-            Text(model.email, style: TextStyle(fontSize: 22)),
-            Text(model.gender, style: TextStyle(fontSize: 22)),
-            Text(model.bod, style: TextStyle(fontSize: 22)),
-            RaisedButton(
+      body: Stack(
+        children: [
+          Positioned(
+            top: 50,
+            right: 12,
+            child: Column(
+              children: <Widget>[
+                Row(children: [
+                  Icon(Icons.account_circle_sharp),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('First Name: ',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(model.firstName, style: TextStyle(fontSize: 20))
+                ]),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    height: 1.0,
+                    width: 130.0,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(children: [
+                  Icon(Icons.account_circle_sharp),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Last Name: ',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(model.lastName, style: TextStyle(fontSize: 20))
+                ]),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    height: 1.0,
+                    width: 130.0,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(children: [
+                  Icon(Icons.email),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Email: ',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(model.email, style: TextStyle(fontSize: 20))
+                ]),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    height: 1.0,
+                    width: 250.0,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(children: [
+                  Icon(Icons.face),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('Gender: ',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(model.gender, style: TextStyle(fontSize: 20))
+                ]),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Container(
+                    height: 1.0,
+                    width: 100.0,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(children: [
+                  Icon(Icons.cake),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('BOD: ',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(model.bod, style: TextStyle(fontSize: 20))
+                ]),
+                SizedBox(
+                  height: 70,
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+              bottom: 350,
+              right: 50,
+              child: RaisedButton(
+                color: Colors.blueAccent,
+                onPressed: () async {
+                  List<Map<String, dynamic>> queryRows =
+                      await DatabaseHelper.instance.queryAll();
+                  print(queryRows);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                child: Text(
+                  'See',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              )),
+          Positioned(
+            left: 50,
+            bottom: 350,
+            child: RaisedButton(
               color: Colors.blueAccent,
               onPressed: () async {
                 int i = await DatabaseHelper.instance.insert({
@@ -316,24 +453,13 @@ class Result extends StatelessWidget {
                 ),
               ),
             ),
-            RaisedButton(
-              color: Colors.blueAccent,
-              onPressed: () async {
-                List<Map<String, dynamic>> queryRows =
-                    await DatabaseHelper.instance.queryAll();
-                print(queryRows);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-              },
-              child: Text(
-                'See',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            )
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 10,
+            height: 255,
+            child: Image.asset('assets/waves.png'),
+          ),
+        ],
       ),
     ));
   }
